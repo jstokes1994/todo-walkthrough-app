@@ -13,6 +13,12 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 import os
 import dj_database_url
 
+
+if os.environ.get('DEVELOPMENT'):
+    development = True
+else:
+    development = False
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -24,7 +30,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'oi(@mbpu(4(dv)8-fg=n6nm#7bzeq^aht9#wfqu_a7o48z!5ms'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = development
+
 
 ALLOWED_HOSTS = [os.environ.get('C9_HOSTNAME'),
                  os.environ.get('HOSTNAME')]
@@ -76,14 +83,15 @@ WSGI_APPLICATION = 'django_todo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
-
-DATABASES = {'default': dj_database_url.parse("DATABASE_URL")}
+if development:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+else:
+    DATABASES = {'default': dj_database_url.parse("DATABASE_URL")}
 
 
 # Password validation
