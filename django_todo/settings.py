@@ -26,7 +26,8 @@ SECRET_KEY = 'oi(@mbpu(4(dv)8-fg=n6nm#7bzeq^aht9#wfqu_a7o48z!5ms'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['django-intro-jstokes1994.c9users.io']
+ALLOWED_HOSTS = ['django-intro-jstokes1994.c9users.io',
+                 'simple-django-todo-js.herokuapp.com']
 
 
 # Application definition
